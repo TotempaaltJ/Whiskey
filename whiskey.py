@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import re
 import random
 import hashlib
@@ -7,7 +8,7 @@ import json
 
 TIME_RE = re.compile(r'([A-Z][a-z]{2}) (\d+), (\d{2}):(\d{2})')
 AUTHOR_RE = re.compile(r'([A-Z][a-z]+) ([a-z ]*[A-Z]\w+):?')
-PHONE_RE = re.compile(r'(\+[\d ]+):?')
+PHONE_RE = re.compile(r'(\+[\d ]+\d)')
 
 
 VOWELS = 'aeiou'
@@ -17,17 +18,17 @@ def namify(string):
 
     hx = hashlib.md5(string).hexdigest()
 
-    length = int(hx[0], 16) + 4
-    length2 = int(hx[1], 16) + 4
+    length = (int(hx[0], 16) % 6) + 4
+    length2 = (int(hx[1], 16) % 6) + 4
 
     con = int(hx[2], 16) <= 8
 
     for i, c in enumerate(hx[3:3+length+length2]):
         num = int(c, 16)
-        if i == 3+length: name += ' '
+        if i == length: name += ' '
 
-        letter = CONSONANTS[num] if con else VOWELS[num % len(VOWELS)-1]
-        name += letter.upper() if i == 0 or i == 3+length else letter
+        letter = CONSONANTS[num] if con else VOWELS[num % (len(VOWELS) - 1)]
+        name += letter.upper() if i == 0 or i == length else letter
 
         con = not con
 
@@ -41,15 +42,15 @@ class Whiskey(object):
 
 
     def _namify_match(self, match):
-        return namify(match.groups()[0])
+        return namify(match.groups()[0].encode('utf-8'))
 
 
     def read(self):
         n = 0
         with open(self.filename, 'r') as f:
             for line in f:
-                line = line.replace("\xe2\x80\xaa", '')
-                line = line.replace("\xe2\x80\xac", '')
+                line = line.replace(b"\xe2\x80\xaa".decode(), '')
+                line = line.replace(b"\xe2\x80\xac".decode(), '')
 
                 line = re.sub(PHONE_RE, self._namify_match, line)
 
@@ -71,7 +72,7 @@ class Whiskey(object):
                 msg['datetime'] = dt.isoformat()
                 msg['time'] = line[0:time.end(3)]
 
-                rest = line[time.end(0) + 3:]
+                rest = line[time.end(3) + 3:]
 
                 if rest.lower().startswith('you'):
                     msg['author'] = 'you'
