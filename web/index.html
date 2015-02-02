@@ -8,7 +8,7 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Whiskeyglazen</h1>
+    <h1>Whiskeyglazen.org</h1>
 
     <div id="chats"></div>
 
@@ -32,13 +32,17 @@
               .addClass('author')
               .text(val.author),
 
+                meta = $('<div></div>')
+              .addClass('meta')
+              .append(anchor)
+              .append(author),
+
                 text = $('<p></p>')
               .text(val.text)
 
             var div = $('<div></div>')
               .addClass(val.type)
-              .append(anchor)
-              .append(author)
+              .append(meta)
               .append(text);
 
             chats.append(div);
