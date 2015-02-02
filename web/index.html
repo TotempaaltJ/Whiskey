@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>whiskeyglazen.org</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Whiskeyglazen</h1>
+
+    <div id="chats"></div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!--<script src="jMinEmoji-SVG.min.js"></script>-->
+    <script>
+      $(function(){
+        var chats = $('#chats');
+        $.getJSON('chat_history.json', function(data) {
+          $.each(data, function(key, val) {
+            console.log(val);
+            var time = $('<time></time>')
+              .attr('datetime', val.datetime)
+              .text(val.time),
+
+                anchor = $('<a></a>')
+              .attr('name', 'chat-' + key)
+              .append(time),
+
+                author = $('<span></span>')
+              .addClass('author')
+              .text(val.author),
+
+                text = $('<p></p>')
+              .text(val.text)
+
+            var div = $('<div></div>')
+              .addClass(val.type)
+              .append(anchor)
+              .append(author)
+              .append(text);
+
+            chats.append(div);
+          });
+
+          //$('.chat').minEmojiSVG();
+        });
+      });
+    </script>
+  </body>
+</html>
