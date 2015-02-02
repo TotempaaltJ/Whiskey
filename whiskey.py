@@ -72,12 +72,12 @@ class Whiskey(object):
                 msg['datetime'] = dt.isoformat()
                 msg['time'] = line[0:time.end(3)]
 
-                rest = line[time.end(3) + 3:]
+                rest = line[time.end(4) + 3:]
 
                 if rest.lower().startswith('you'):
                     msg['author'] = 'you'
-                    before = line[:3]
-                    rest = line[3:]
+                    before = rest[:3]
+                    rest = rest[3:]
                 else:
                     author = re.match(AUTHOR_RE, rest.lstrip())
                     msg['author'] = author.groups()[0]
