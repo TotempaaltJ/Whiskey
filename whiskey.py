@@ -20,7 +20,7 @@ class Whiskey(object):
 
 
     def _namify_match(self, match):
-        return namify(match.groups()[0].encode('utf-8'))
+        return namify(match.groups()[0])
 
 
     def read(self):
