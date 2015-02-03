@@ -68,6 +68,9 @@ time {
   display: inline-block;
   padding: 1em 0 1em 1em;
 }
+.action + .action .meta {
+  padding-top: 0;
+}
 
 .chat p {
   width: 25em;
@@ -77,6 +80,9 @@ time {
 }
 .action p {
   display: inline-block;
+}
+.action + .action p {
+  padding-top: 0;
 }
 p {
   margin: 0;
