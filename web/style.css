@@ -5,8 +5,10 @@ body {
 
 .chat, .action {
   margin: .5em auto;
-  background: white;
   max-width: 34em;
+}
+.chat {
+  background: white;
 }
 
 .chat:before,
@@ -21,16 +23,22 @@ body {
     clear:both;
 }
 
+.chat time {
+  display: block;
+}
+.action time {
+  display: inline-block;
+  width: 7em;
+}
 time {
   font-weight: 300;
-  display: block;
 }
 
-.chat .author {
-  display: block;
-}
 .chat .author:after {
   content: ':';
+}
+.action .author:after {
+  content: '\00a0';
 }
 .author {
   font-weight: 600;
@@ -49,19 +57,28 @@ time {
   zoom: 1;
 }
 
-.meta {
-  width: 5em;
+.chat .meta {
   float: left;
   color: #888;
-  padding: 1em;
   height: 100%;
+  width: 5em;
+  padding: 1em;
+}
+.action .meta {
+  display: inline-block;
+  padding: 1em 0 1em 1em;
 }
 
-p {
-  padding: 1em;
+.chat p {
   width: 25em;
   max-width: 100%;
   float: left;
+  padding: 1em;
+}
+.action p {
+  display: inline-block;
+}
+p {
   margin: 0;
 }
 
