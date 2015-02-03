@@ -6,33 +6,11 @@ from datetime import datetime
 from calendar import month_abbr
 import json
 
+from namify import namify
+
 TIME_RE = re.compile(r'([A-Z][a-z]{2}) (\d+), (\d{2}):(\d{2})')
 AUTHOR_RE = re.compile(r'([A-Z][a-z]+) ([a-z ]*[A-Z]\w+):?')
 PHONE_RE = re.compile(r'(\+[\d ]+\d)')
-
-
-VOWELS = 'aeiou'
-CONSONANTS = 'bcdfghklmnpqrstvwxyz'
-def namify(string):
-    name = ''
-
-    hx = hashlib.md5(string).hexdigest()
-
-    length = (int(hx[0], 16) % 6) + 4
-    length2 = (int(hx[1], 16) % 6) + 4
-
-    con = int(hx[2], 16) <= 8
-
-    for i, c in enumerate(hx[3:3+length+length2]):
-        num = int(c, 16)
-        if i == length: name += ' '
-
-        letter = CONSONANTS[num] if con else VOWELS[num % (len(VOWELS) - 1)]
-        name += letter.upper() if i == 0 or i == length else letter
-
-        con = not con
-
-    return name
 
 
 class Whiskey(object):
