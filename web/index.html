@@ -25,7 +25,6 @@
             colors = {};
         $.getJSON('chat_history.json', function(data) {
           $.each(data, function(key, val) {
-            console.log(val);
             var time = $('<time></time>')
               .attr('datetime', val.datetime)
               .text(val.time),
