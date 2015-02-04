@@ -25,22 +25,13 @@ body {
     clear:both;
 }
 
-.chat time {
-  display: block;
-}
-.action time {
-  display: inline-block;
-  width: 7em;
-}
 time {
+  display: block;
   font-weight: 300;
 }
 
-.chat .author:after {
-  content: ':';
-}
 .action .author:after {
-  content: '\00a0';
+  content: ' ';
 }
 .author {
   font-weight: 600;
@@ -50,34 +41,26 @@ time {
   color: #555;
 }
 
-.chat .meta {
-  float: left;
-  color: #888;
-  height: 100%;
-  width: 5em;
-  padding: 1em;
-}
-.action .meta {
-  display: inline-block;
-  padding: 1em 0 1em 1em;
-}
 .action + .action .meta {
   padding-top: 0;
 }
-
-.chat p {
-  width: 25em;
-  max-width: 100%;
-  float: left;
+.meta {
   padding: 1em;
+  float: left;
+  width: 6em;
+  height: 100%;
+  color: #888;
 }
-.action p {
-  display: inline-block;
-}
+
 .action + .action p {
   padding-top: 0;
 }
 p {
+  display: block;
+  width: 24em;
+  max-width: 100%;
+  float: left;
+  padding: 1em;
   margin: 0;
 }
 

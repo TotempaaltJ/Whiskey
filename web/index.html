@@ -39,11 +39,16 @@
 
                 meta = $('<div></div>')
               .addClass('meta')
-              .append(anchor)
-              .append(author),
+              .append(anchor),
 
                 text = $('<p></p>')
-              .text(val.text)
+              .text(val.text);
+
+            if(val.type == "chat") {
+              meta.prepend(author);
+            } else {
+              text.prepend(author);
+            }
 
             var div = $('<div></div>')
               .addClass(val.type)
