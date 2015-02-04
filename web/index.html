@@ -17,7 +17,12 @@
     <!--script src="jMinEmoji.min.js"></script-->
     <script>
       $(function(){
-        var chats = $('#chats');
+        var chats = $('#chats'),
+            all_colors = [
+            '#001f3f', '#0074D9', '#7FDBFF', '#39CCCC', '#3D9970', '#2ECC40',
+            '#FF851B', '#FF4136', '#85144b', '#F012BE', '#B10DC9',
+            ],
+            colors = {};
         $.getJSON('chat_history.json', function(data) {
           $.each(data, function(key, val) {
             console.log(val);
@@ -45,6 +50,13 @@
               .addClass(val.type)
               .append(meta)
               .append(text);
+
+            if(val.author in colors) {
+              div.css('border-color', colors[val.author]);
+            } else {
+              colors[val.author] = all_colors.pop();
+              div.css('border-color', colors[val.author]);
+            }
 
             chats.append(div);
           });

@@ -6,9 +6,11 @@ body {
 .chat, .action {
   margin: .5em auto;
   max-width: 34em;
+  border-left-width: 5px;
 }
 .chat {
   background: white;
+  border-left-style: solid;
 }
 
 .chat:before,
