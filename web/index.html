@@ -6,6 +6,7 @@
     <title>whiskeyglazen.org</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
     <link href="style.css" rel="stylesheet">
+    <!--link href="minEmoji.css" rel="stylesheet"-->
   </head>
   <body>
     <h1>Whiskeyglazen.org</h1>
@@ -13,7 +14,7 @@
     <div id="chats"></div>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!--<script src="jMinEmoji-SVG.min.js"></script>-->
+    <!--script src="jMinEmoji.min.js"></script-->
     <script>
       $(function(){
         var chats = $('#chats');
@@ -48,7 +49,7 @@
             chats.append(div);
           });
 
-          //$('.chat').minEmojiSVG();
+          //$('.chat, .action').minEmoji();
         });
       });
     </script>

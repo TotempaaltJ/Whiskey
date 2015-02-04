@@ -48,15 +48,6 @@ time {
   color: #555;
 }
 
-.em {
-  width: 20px;
-  height: 20px;
-  display: -moz-inline-stack;
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-}
-
 .chat .meta {
   float: left;
   color: #888;
