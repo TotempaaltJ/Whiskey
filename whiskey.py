@@ -48,7 +48,7 @@ class Whiskey(object):
                     int(g[3])
                 )
                 msg['datetime'] = dt.isoformat()
-                msg['time'] = line[0:time.end(3)]
+                msg['time'] = line[0:time.end(4)]
 
                 rest = line[time.end(4) + 3:]
 
