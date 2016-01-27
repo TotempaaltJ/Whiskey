@@ -11,6 +11,8 @@ body {
 .chat {
   background: white;
   border-left-style: solid;
+
+  word-wrap: break-word;
 }
 
 .chat:before,
@@ -62,6 +64,8 @@ p {
   float: left;
   padding: 1em;
   margin: 0;
+
+  white-space: pre-line;
 }
 
 h1 {

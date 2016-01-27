@@ -1,73 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
 
-    <title>whiskeyglazen.org</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
-    <link href="style.css" rel="stylesheet">
-    <!--link href="minEmoji.css" rel="stylesheet"-->
-  </head>
-  <body>
-    <h1>Whiskeyglazen.org</h1>
+        <title>whiskeyglazen.org</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+        <link href="style.css" rel="stylesheet">
+        <!--link href="minEmoji.css" rel="stylesheet"-->
+    </head>
+    <body>
+        <h1>Whiskeyglazen.org</h1>
 
-    <div id="chats"></div>
+        <div id="chats"></div>
 
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <!--script src="jMinEmoji.min.js"></script-->
-    <script>
-      $(function(){
-        var chats = $('#chats'),
-            all_colors = [
-            '#001f3f', '#0074D9', '#7FDBFF', '#39CCCC', '#3D9970', '#2ECC40',
-            '#FF851B', '#FF4136', '#85144b', '#F012BE', '#B10DC9',
-            ],
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <!--script src="jMinEmoji.min.js"></script-->
+        <script>
+$(function(){
+    var chats = $('#chats'),
+    all_colors = [
+        '#001f3f', '#0074D9', '#7FDBFF', '#39CCCC', '#3D9970', '#2ECC40',
+        '#FF851B', '#FF4136', '#85144b', '#F012BE', '#B10DC9',
+    ],
             colors = {};
-        $.getJSON('chat_history.json', function(data) {
-          $.each(data, function(key, val) {
+    $.getJSON('chat_history.json', function(data) {
+        $.each(data, function(key, val) {
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var date = new Date(val.datetime);
+
             var time = $('<time></time>')
-              .attr('datetime', val.datetime)
-              .text(val.time),
+                .attr('datetime', val.datetime)
+                .text(date.getDate() + ' ' + months[date.getMonth()] + ', ' +
+                      date.getHours() + ':' + date.getMinutes()),
 
                 anchor = $('<a></a>')
-              .attr('name', 'chat-' + key)
-              .append(time),
+                    .attr('name', 'chat-' + key)
+                    .append(time),
 
-                author = $('<span></span>')
-              .addClass('author')
-              .text(val.author),
+                    author = $('<span></span>')
+                        .addClass('author')
+                        .text(val.author),
 
-                meta = $('<div></div>')
-              .addClass('meta')
-              .append(anchor),
+                        meta = $('<div></div>')
+                            .addClass('meta')
+                            .append(anchor),
 
-                text = $('<p></p>')
-              .text(val.text);
+                            text = $('<p></p>')
+                                .text(val.text);
 
             if(val.type == "chat") {
-              meta.prepend(author);
+                meta.prepend(author);
             } else {
-              text.prepend(author);
+                text.prepend(author);
             }
 
             var div = $('<div></div>')
-              .addClass(val.type)
-              .append(meta)
-              .append(text);
+                .addClass(val.type)
+                .append(meta)
+                .append(text);
 
             if(val.author in colors) {
-              div.css('border-color', colors[val.author]);
+                div.css('border-color', colors[val.author]);
             } else {
-              colors[val.author] = all_colors.pop();
-              div.css('border-color', colors[val.author]);
+                colors[val.author] = all_colors.pop();
+                div.css('border-color', colors[val.author]);
             }
 
             chats.append(div);
-          });
-
-          //$('.chat, .action').minEmoji();
         });
-      });
-    </script>
-  </body>
+
+        //$('.chat, .action').minEmoji();
+    });
+});
+        </script>
+    </body>
 </html>
